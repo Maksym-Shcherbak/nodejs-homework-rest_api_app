@@ -1,23 +1,27 @@
 const Contact = require("./schemas/contact");
 
-const listContacts = async () => {
+const listContacts = () => {
   return Contact.find();
 };
 
-const getContactById = (id) => {
-  return Contact.findOne({ _id: id });
+const getContactById = (contactId) => {
+  return Contact.findOne({ _id: contactId });
 };
 
 const addContact = (body) => {
   return Contact.create(body);
 };
 
-const updateContact = (id, fields) => {
-  return Contact.findByIdAndUpdate({ _id: id }, fields, { new: true });
+const updateContact = (contactId, fields) => {
+  return Contact.findByIdAndUpdate({ _id: contactId }, fields, { new: true });
 };
 
-const removeContact = (id) => {
-  return Contact.findByIdAndDelete({ _id: id });
+const removeContact = (contactId) => {
+  return Contact.findByIdAndDelete({ _id: contactId });
+};
+
+const updateStatusContact = (contactId, body) => {
+  return Contact.findByIdAndUpdate({ _id: contactId }, body, { new: true });
 };
 
 module.exports = {
@@ -26,4 +30,5 @@ module.exports = {
   addContact,
   updateContact,
   removeContact,
+  updateStatusContact,
 };
