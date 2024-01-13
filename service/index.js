@@ -4,8 +4,8 @@ const listContacts = () => {
   return Contact.find();
 };
 
-const getContactById = (contactId) => {
-  return Contact.findOne({ _id: contactId });
+const getContact = (contactId) => {
+  return Contact.findById(contactId);
 };
 
 const addContact = (body) => {
@@ -13,20 +13,20 @@ const addContact = (body) => {
 };
 
 const updateContact = (contactId, fields) => {
-  return Contact.findByIdAndUpdate({ _id: contactId }, fields, { new: true });
+  return Contact.findByIdAndUpdate(contactId, fields, { new: true });
 };
 
 const removeContact = (contactId) => {
-  return Contact.findByIdAndDelete({ _id: contactId });
+  return Contact.findByIdAndDelete(contactId);
 };
 
 const updateStatusContact = (contactId, body) => {
-  return Contact.findByIdAndUpdate({ _id: contactId }, body, { new: true });
+  return Contact.findByIdAndUpdate(contactId, body, { new: true });
 };
 
 module.exports = {
   listContacts,
-  getContactById,
+  getContact,
   addContact,
   updateContact,
   removeContact,
