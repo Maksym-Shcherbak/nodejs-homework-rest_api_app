@@ -14,7 +14,7 @@ const addContact = (body) => {
 
 const updateContact = (query, fields) => {
   // return Contact.findByIdAndUpdate(contactId, fields, { new: true });
-  return Contact.findOneAndUpdate(query, fields);
+  return Contact.findOneAndUpdate(query, fields, { new: true });
 };
 
 const removeContact = (query) => {
@@ -22,8 +22,9 @@ const removeContact = (query) => {
   return Contact.findOneAndDelete(query);
 };
 
-const updateStatusContact = (contactId, body) => {
-  return Contact.findByIdAndUpdate(contactId, body, { new: true });
+const updateStatusContact = (query, field) => {
+  // return Contact.findByIdAndUpdate(contactId, body, { new: true });
+  return Contact.findOneAndUpdate(query, field, { new: true });
 };
 
 module.exports = {
