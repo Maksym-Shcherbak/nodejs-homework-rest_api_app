@@ -6,7 +6,7 @@ const getAllContacts = async (req, res, next) => {
   try {
     const { id } = req.user;
     const { page = 1, limit = 20 } = req.query;
-    const skip = (page - 1) * 10;
+    const skip = (page - 1) * limit;
     const allContacts = await contacts
       .listContacts({ owner: id }, null, { skip, limit })
       .populate("owner", "email subscription");
