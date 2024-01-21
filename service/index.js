@@ -1,11 +1,11 @@
 const Contact = require("./schemas/contact");
 
-const listContacts = () => {
-  return Contact.find();
+const listContacts = (filter) => {
+  return Contact.find(filter);
 };
 
-const getContact = (contactId) => {
-  return Contact.findById(contactId);
+const getContact = (contactId, filter) => {
+  return Contact.findOne(contactId, filter);
 };
 
 const addContact = (body) => {

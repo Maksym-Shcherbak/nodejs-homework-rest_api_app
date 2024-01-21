@@ -25,6 +25,6 @@ const userSchema = new Schema(
 
 userSchema.post("save", handleMongooseError);
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
