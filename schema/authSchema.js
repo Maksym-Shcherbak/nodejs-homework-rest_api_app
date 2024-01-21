@@ -5,4 +5,8 @@ const authSchema = Joi.object({
   password: Joi.string().min(8).required(),
 });
 
-module.exports = { authSchema };
+const authUpdateSub = Joi.object({
+  subscription: Joi.string().required(),
+});
+
+module.exports = { authSchema, authUpdateSub };

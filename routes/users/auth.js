@@ -12,4 +12,6 @@ router.post("/logout", authMiddleware, authControllers.logout);
 
 router.get("/current", authMiddleware, authControllers.currentUser);
 
+router.patch("/", authMiddleware, authControllers.updateSub);
+
 module.exports = router;

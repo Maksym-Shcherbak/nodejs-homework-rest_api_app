@@ -95,4 +95,30 @@ const currentUser = async (req, res, next) => {
   }
 };
 
-module.exports = { registerUser, loginUser, logout, currentUser };
+const updateSub = async (req, res, next) => {
+  try {
+    const { error } = schemas.authUpdateSub.validate(req.body, {
+      errors: { wrap: { label: false } },
+      messages: { "any.required": "missing required {{#label}} field" },
+    });
+    if (error) {
+      throw HttpError(400, error.message);
+    }
+    await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        subscription: req.body.subscription,
+      },
+      { runValidators: true }
+    );
+    res.status(201).json({
+      user: {
+        subscription: req.body.subscription,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { registerUser, loginUser, logout, currentUser, updateSub };
