@@ -1,7 +1,7 @@
 const Contact = require("./schemas/contact");
 
-const listContacts = (filter) => {
-  return Contact.find(filter);
+const listContacts = (filter, fields, pagination) => {
+  return Contact.find(filter, fields, pagination);
 };
 
 const getContact = (contactId, filter) => {
