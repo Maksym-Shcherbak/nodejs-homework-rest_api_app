@@ -1,4 +1,3 @@
-const { query } = require("express");
 const Contact = require("./schemas/contact");
 
 const listContacts = (filter, fields, pagination) => {
