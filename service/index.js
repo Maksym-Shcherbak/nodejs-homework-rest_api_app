@@ -1,23 +1,26 @@
+const { query } = require("express");
 const Contact = require("./schemas/contact");
 
 const listContacts = (filter, fields, pagination) => {
   return Contact.find(filter, fields, pagination);
 };
 
-const getContact = (contactId, filter) => {
-  return Contact.findOne(contactId, filter);
+const getContact = (query) => {
+  return Contact.findOne(query);
 };
 
 const addContact = (body) => {
   return Contact.create(body);
 };
 
-const updateContact = (contactId, fields) => {
-  return Contact.findByIdAndUpdate(contactId, fields, { new: true });
+const updateContact = (query, fields) => {
+  // return Contact.findByIdAndUpdate(contactId, fields, { new: true });
+  return Contact.findOneAndUpdate(query, fields);
 };
 
-const removeContact = (contactId) => {
-  return Contact.findByIdAndDelete(contactId);
+const removeContact = (query) => {
+  console.log(query);
+  return Contact.findOneAndDelete(query);
 };
 
 const updateStatusContact = (contactId, body) => {
