@@ -6,12 +6,19 @@ const getAllContacts = async (req, res, next) => {
   try {
     const { id } = req.user;
     const { page = 1, limit = 20 } = req.query;
+    const { favorite } = req.query;
     const skip = (page - 1) * limit;
-    console.log(skip);
-    const allContacts = await contacts
-      .listContacts({ owner: id }, null, { skip, limit })
-      .populate("owner", "email subscription");
-    res.status(200).json(allContacts);
+    if (favorite) {
+      const allContacts = await contacts
+        .listContacts({ owner: id, favorite: true }, null, { skip, limit })
+        .populate("owner", "email subscription");
+      res.status(200).json(allContacts);
+    } else {
+      const allContacts = await contacts
+        .listContacts({ owner: id }, null, { skip, limit })
+        .populate("owner", "email subscription");
+      res.status(200).json(allContacts);
+    }
   } catch (error) {
     next(error);
   }
