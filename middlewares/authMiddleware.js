@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../service/schemas/user");
 
 const auth = async (req, res, next) => {
-  console.log(req.headers);
   const authHeader = req.headers.authorization;
 
   if (typeof authHeader === "undefined") {

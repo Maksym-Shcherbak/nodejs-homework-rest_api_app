@@ -52,6 +52,7 @@ const addNewContact = async (req, res, next) => {
       errors: { wrap: { label: false } },
       messages: { "any.required": "missing required {{#label}} field" },
     });
+    console.log(error);
     if (error) {
       throw HttpError(400, error.message);
     }

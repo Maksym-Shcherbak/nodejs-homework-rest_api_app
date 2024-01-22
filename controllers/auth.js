@@ -1,4 +1,4 @@
-const HttpError = require("../helpers/HttpError");
+const HttpError = require("../helpers/HttpError.js");
 const schemas = require("../schema/authSchema");
 const User = require("../service/schemas/user");
 const bcrypt = require("bcrypt");
@@ -30,22 +30,24 @@ const registerUser = async (req, res, next) => {
       },
     });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
 
 const loginUser = async (req, res, next) => {
-  const { error } = schemas.authSchema.validate(req.body, {
-    errors: { wrap: { label: false } },
-    messages: { "any.required": "missing required {{#label}} field" },
-  });
-  if (error) {
-    throw HttpError(400, error.message);
-  }
-  const { email, password } = req.body;
-
   try {
+    const { error } = schemas.authSchema.validate(req.body, {
+      errors: { wrap: { label: false } },
+      messages: {
+        "any.required": "missing required {{#label}} field",
+        "string.min": "password should have a minimum length of {{#limit}}",
+      },
+    });
+    if (error) {
+      throw HttpError(400, error.message);
+    }
+    const { email, password } = req.body;
+
     const user = await User.findOne({ email });
 
     if (user === null) {
