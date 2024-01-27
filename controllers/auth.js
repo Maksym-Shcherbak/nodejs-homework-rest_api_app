@@ -1,4 +1,5 @@
 const HttpError = require("../helpers/HttpError.js");
+const { createAvatarURL } = require("../helpers/avatarURL.js");
 const schemas = require("../schema/authSchema");
 const User = require("../service/schemas/user");
 const bcrypt = require("bcrypt");
@@ -22,7 +23,11 @@ const registerUser = async (req, res, next) => {
       return;
     }
     const passwordHash = await bcrypt.hash(password, 10);
-    await User.create({ email, password: passwordHash });
+    await User.create({
+      email,
+      password: passwordHash,
+      avatarURL: createAvatarURL(email),
+    });
     res.status(201).json({
       user: {
         email,
