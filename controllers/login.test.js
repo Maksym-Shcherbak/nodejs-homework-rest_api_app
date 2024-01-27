@@ -19,7 +19,6 @@ describe("POST /users/login", () => {
       email: "maksym@gmail.com",
       password: "12345678",
     });
-    console.log(res.body);
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("token");
     // expect(res.body.user.email).toBe("maksym@gmail.com");
