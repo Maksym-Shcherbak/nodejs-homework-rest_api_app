@@ -7,6 +7,9 @@ const { nanoid } = require("nanoid");
 
 const updateUserAvatar = async (req, res, next) => {
   try {
+    if (!req.file) {
+      throw HttpError(400, "Select file,please");
+    }
     const { path: tempUpload, originalname } = req.file;
     const image = await Jimp.read(tempUpload);
     const extension = path.extname(originalname);
@@ -28,7 +31,7 @@ const updateUserAvatar = async (req, res, next) => {
     );
     res.status(200).send({ avatarURL: user.avatarURL });
   } catch (error) {
-    throw HttpError(error.message, 400);
+    next(error);
   }
 };
 
