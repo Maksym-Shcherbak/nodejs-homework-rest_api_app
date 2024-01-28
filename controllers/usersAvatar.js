@@ -26,7 +26,7 @@ const updateUserAvatar = async (req, res, next) => {
       { avatarURL },
       { new: true }
     );
-    res.status(200).send(`avatarURL: ${user.avatarURL}`);
+    res.status(200).send({ avatarURL: user.avatarURL });
   } catch (error) {
     throw HttpError(error.message, 400);
   }
